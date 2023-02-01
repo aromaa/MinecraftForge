@@ -1,6 +1,6 @@
 --- a/net/minecraft/client/multiplayer/ClientHandshakePacketListenerImpl.java
 +++ b/net/minecraft/client/multiplayer/ClientHandshakePacketListenerImpl.java
-@@ -127,6 +_,7 @@
+@@ -15,6 +_,7 @@
        this.f_104521_.accept(Component.m_237115_("connect.joining"));
        this.f_104523_ = p_104547_.m_134774_();
        this.f_104522_.m_129498_(ConnectionProtocol.PLAY);

@@ -1,0 +1,17 @@
+--- a/net/minecraft/client/gui/screens/ConnectScreen.java
++++ b/net/minecraft/client/gui/screens/ConnectScreen.java
+@@ -7,6 +_,7 @@
+                inetsocketaddress = optional.get();
+                ConnectScreen.this.f_95684_ = Connection.m_178300_(inetsocketaddress, p_251955_.f_91066_.m_92175_());
+                ConnectScreen.this.f_95684_.m_129505_(new ClientHandshakePacketListenerImpl(ConnectScreen.this.f_95684_, p_251955_, p_252078_, ConnectScreen.this.f_95686_, false, (Duration)null, ConnectScreen.this::m_95717_));
+-               ConnectScreen.this.f_95684_.m_129512_(new ClientIntentionPacket(inetsocketaddress.getHostName(), inetsocketaddress.getPort(), ConnectionProtocol.LOGIN));
++               ConnectScreen.this.f_95684_.m_129512_(new ClientIntentionPacket(inetsocketaddress.getHostName(), inetsocketaddress.getPort(), ConnectionProtocol.LOGIN, p_252078_.transferData != null));
++               if (p_252078_.transferData != null) {
++                  net.minecraft.network.FriendlyByteBuf buffer = new net.minecraft.network.FriendlyByteBuf(io.netty.buffer.Unpooled.buffer(p_252078_.transferData.length + 1));
++                  buffer.writeByte(1);
++                  buffer.writeBytes(p_252078_.transferData);
++                  ConnectScreen.this.f_95684_.m_129512_(new net.minecraft.network.protocol.login.ServerboundCustomQueryPacket(net.minecraftforge.network.NetworkConstants.TRANSFER_PACKET_ID, buffer));
++               }
+                ConnectScreen.this.f_95684_.m_129512_(new ServerboundHelloPacket(p_251955_.m_91094_().m_92546_(), Optional.ofNullable(p_251955_.m_91094_().m_240411_())));
+             } catch (Exception exception2) {
+                if (ConnectScreen.this.f_95685_) {

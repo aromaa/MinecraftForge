@@ -102,6 +102,23 @@ class NetworkInitialization {
         return playChannel;
     }
 
+    public static SimpleChannel getTransferChannel() {
+        SimpleChannel transferChannel = NetworkRegistry.ChannelBuilder.
+                named(NetworkConstants.PROXY_TRANSFER_RESOURCE).
+                clientAcceptedVersions(a -> true).
+                serverAcceptedVersions(a -> true).
+                networkProtocolVersion(() -> "1").
+                simpleChannel();
+
+        transferChannel.messageBuilder(TransferMessages.S2CTransferServer.class,0).
+                decoder(TransferMessages.S2CTransferServer::decode).
+                encoder(TransferMessages.S2CTransferServer::encode).
+                consumerNetworkThread(TransferMessages.S2CTransferServer::handle).
+                add();
+
+        return transferChannel;
+    }
+
     public static List<EventNetworkChannel> buildMCRegistrationChannels() {
         final EventNetworkChannel mcRegChannel = NetworkRegistry.ChannelBuilder.
                 named(NetworkConstants.MC_REGISTER_RESOURCE).

@@ -29,6 +29,7 @@ public class NetworkConstants
     public static final int FMLNETVERSION = 3;
     public static final String NETVERSION = FMLNETMARKER + FMLNETVERSION;
     public static final String NOVERSION = "NONE";
+    public static final int TRANSFER_PACKET_ID = 2063509483;
 
     static final Marker NETWORK = MarkerManager.getMarker("FMLNETWORK");
     static final AttributeKey<String> FML_NETVERSION = AttributeKey.valueOf("fml:netversion");
@@ -40,8 +41,10 @@ public class NetworkConstants
     static final ResourceLocation FML_PLAY_RESOURCE = new ResourceLocation("fml:play");
     static final ResourceLocation MC_REGISTER_RESOURCE = new ResourceLocation("minecraft:register");
     static final ResourceLocation MC_UNREGISTER_RESOURCE = new ResourceLocation("minecraft:unregister");
+    static final ResourceLocation PROXY_TRANSFER_RESOURCE = new ResourceLocation("proxy:transfer");
     static final SimpleChannel handshakeChannel = NetworkInitialization.getHandshakeChannel();
     static final SimpleChannel playChannel = NetworkInitialization.getPlayChannel();
+    static final SimpleChannel transferChannel = NetworkInitialization.getTransferChannel();
     static final List<EventNetworkChannel> mcRegChannels = NetworkInitialization.buildMCRegistrationChannels();
     /**
      * Return this value in your {@link DisplayTest} function to be ignored.
